@@ -296,7 +296,13 @@ void handleTimeout(void)
  */
 void readCommand(void) 
 {
-  input.raw = commandR.speed;
+  if (commandR.steer == 0)
+    {
+      input.raw = commandR.speed;
+    }
+  else {
+    input.raw = commandR.speed*-1;
+  }
   calcInputCmd(&input, InputMin, InputMax);
   handleTimeout();
 }

@@ -271,7 +271,7 @@ int main(void)
       batVoltageCalib = batVoltage * BAT_CALIB_REAL_VOLTAGE / BAT_CALIB_ADC;
 
       // ####### FEEDBACK SERIAL OUT #######
-      if (main_loop_counter % 2 == 0)     // Send data periodically every 10 ms
+      if (main_loop_counter % 50 == 0)     // Send data periodically every 10 ms 2 10ms
       {
         if (!(USART3->CR1 & USART_CR1_TXEIE)) // tx is empty
         {
@@ -321,7 +321,7 @@ int main(void)
 
       // ####### INACTIVITY TIMEOUT #######
       inactivity_timeout_counter++;
-      if ( abs(speed) > 50) inactivity_timeout_counter = 0;
+      if ( abs(speed) > 10) inactivity_timeout_counter = 0;
 
       if (inactivity_timeout_counter > (INACTIVITY_TIMEOUT * 60 * 1000) / (DELAY_IN_MAIN_LOOP + 1))  // rest of main loop needs maybe 1ms
          poweroff();
